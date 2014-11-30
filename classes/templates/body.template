@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Activity</key>
+	<string>{{Activity}}</string>
+	<key>Creation Date</key>
+	<date>{{Creation_Date}}</date>
+	<key>Creator</key>
+	<dict>
+		<key>Device Agent</key>
+		<string>{{Creator_Device-Agent}}</string>
+		<key>Generation Date</key>
+		<date>{{Creation_Date}}</date>
+		<key>Host Name</key>
+		<string>{{Creator_Host-Name}}</string>
+		<key>OS Agent</key>
+		<string>{{Creator_OS-Agent}}</string>
+		<key>Software Agent</key>
+		<string>{{Creator_Software-Agent}}</string>
+	</dict>
+	<key>Entry Text</key>
+	<string>{{Entry-Text}}</string>
+	<key>Starred</key>
+	<false/>
+	<key>Time Zone</key>
+	<string>{{Time-Zone}}</string>
+	<key>UUID</key>
+	<string>{{UUID}}</string>
+</dict>
+</plist>
