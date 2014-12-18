@@ -36,12 +36,12 @@ class DayOneEntry {
         }
 
         // Set general stuff
-        $this->_creationDate = strval(date('Y-m-d\TG:i:s\Z'));
+        $this->setTime(time());
         $this->_activity = 'Stationary';
         $this->_timeZone = date_default_timezone_get();
         $this->_creator = array(
             'Device Agent' => 'DayOne PHP',
-            'Generation Date' => $this->_creationDate,
+            'Generation Date' => strval(date('Y-m-d\TG:i:s\Z')),
             'Host Name' => 'DayOne PHP',
             'OS Agent' => 'DayOne PHP',
             'Software Agent' => 'DayOne PHP' . ' ' . self::VERSION
@@ -74,6 +74,15 @@ class DayOneEntry {
         if ($this->debug) {
             echo 'EntryText addedd successfully';
         }
+    }
+
+    /**
+     * Sets time of entry
+     *
+     * @param int $time Timestampt
+     */
+    public function setTime($time) {
+        $this->_creationDate = strval(date('Y-m-d\TG:i:s\Z', $time));
     }
 
     /**
@@ -121,6 +130,7 @@ class DayOneEntry {
         $template = file_get_contents(dirname(__FILE__) . '/templates/body.template');
 
         $template = str_replace('{{Creation_Date}}', $this->_creationDate, $template);
+        $template = str_replace('{{Creator_Generation-Date}}', $this->_creator['Generation Date'], $template);
         $template = str_replace('{{Creator_Device-Agent}}', $this->_creator['Device Agent'], $template);
         $template = str_replace('{{Creator_Host-Name}}', $this->_creator['Host Name'], $template);
         $template = str_replace('{{Creator_OS-Agent}}', $this->_creator['OS Agent'], $template);

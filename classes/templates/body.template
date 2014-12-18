@@ -11,7 +11,7 @@
 		<key>Device Agent</key>
 		<string>{{Creator_Device-Agent}}</string>
 		<key>Generation Date</key>
-		<date>{{Creation_Date}}</date>
+		<date>{{Creator_Generation-Date}}</date>
 		<key>Host Name</key>
 		<string>{{Creator_Host-Name}}</string>
 		<key>OS Agent</key>
