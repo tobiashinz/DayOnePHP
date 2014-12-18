@@ -12,9 +12,10 @@ class DayOneEntry {
      * @var string $_entryText      Saves the Text of the entry
      * @var string $_timeZone       Saves the TimeZone where entry was created
      * @var mixed $_music           Saves information about music
+     * @var mixed $_location        Saves information about location
      * @var bool $_debug            Saves if Debug-mode is used
      */
-    protected $_uuid, $_creationDate, $_activity, $_creator, $_entryText, $_timeZone, $_music, $_debug;
+    protected $_uuid, $_creationDate, $_activity, $_creator, $_entryText, $_timeZone, $_music, $_location, $_debug;
 
     const VERSION = '0.0.1';
 
@@ -76,6 +77,34 @@ class DayOneEntry {
     }
 
     /**
+     * Sets location for DayOne-Entry
+     *
+     * @param string $city City's name
+     * @param string $country Country
+     * @param string $locality Locality (e.g. district)
+     * @param float $latitude Latitude
+     * @param float $longitude Longitude
+     * @param string $name Name of Location
+     */
+    public function setLocation($city, $country, $locality, $latitude, $longitude, $name) {
+        if (empty($city) || empty($country) || empty($locality) || empty($latitude) || empty($longitude) || empty($name)) {
+            die('setLocation(): all fields must be set');
+        }
+        $this->_location = array(
+            'city' => strval($city),
+            'country' => strval($country),
+            'locality' => strval($locality),
+            'latitude' => floatval($latitude),
+            'longitude' => floatval($longitude),
+            'name' => strval($name),
+        );
+
+        if ($this->debug) {
+            echo 'Location set successfully';
+        }
+    }
+
+    /**
      * Returns UUID of DayOne-Entry
      *
      * @return string The UUID
@@ -99,9 +128,26 @@ class DayOneEntry {
         $template = str_replace('{{UUID}}', $this->_uuid, $template);
         $template = str_replace('{{Time-Zone}}', $this->_timeZone, $template);
         $template = str_replace('{{Activity}}', $this->_activity, $template);
-
-
         $template = str_replace('{{Entry-Text}}', $this->entryText, $template);
+
+        // Check if location has to be added
+        if (isset($this->_location)) {
+            // Load Template-Location
+            $templateLocation = file_get_contents(dirname(__FILE__) . '/templates/location.template');
+
+            $templateLocation = str_replace('{{City}}', $this->_location['city'], $templateLocation);
+            $templateLocation = str_replace('{{Country}}', $this->_location['country'], $templateLocation);
+            $templateLocation = str_replace('{{Latitude}}', $this->_location['latitude'], $templateLocation);
+            $templateLocation = str_replace('{{Longitude}}', $this->_location['longitude'], $templateLocation);
+            $templateLocation = str_replace('{{Locality}}', $this->_location['locality'], $templateLocation);
+            $templateLocation = str_replace('{{Place_Name}}', $this->_location['name'], $templateLocation);
+
+            // Put location text into DayOne-Entry
+            $template = str_replace('{{Location}}', $templateLocation, $template);
+        } else {
+            $template = str_replace('{{Location}}', '', $template);
+        }
+
         return $template;
     }
 

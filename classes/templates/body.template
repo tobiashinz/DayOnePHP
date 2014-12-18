@@ -21,6 +21,7 @@
 	</dict>
 	<key>Entry Text</key>
 	<string>{{Entry-Text}}</string>
+	{{Location}}
 	<key>Starred</key>
 	<false/>
 	<key>Time Zone</key>

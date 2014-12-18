@@ -1,0 +1,15 @@
+	<key>Location</key>
+	<dict>
+		<key>Administrative Area</key>
+		<string>{{City}}</string>
+		<key>Country</key>
+		<string>{{Country}}</string>
+		<key>Latitude</key>
+		<real>{{Latitude}}</real>
+		<key>Longitude</key>
+		<real>{{Longitude}}</real>
+		<key>Locality</key>
+		<string>{{Locality}}</string>
+		<key>Place Name</key>
+		<string>{{Place_Name}}</string>
+	</dict>
