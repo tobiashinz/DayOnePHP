@@ -12,4 +12,5 @@
 		<string>{{Locality}}</string>
 		<key>Place Name</key>
 		<string>{{Place_Name}}</string>
+		{{Location_Foursquare-ID}}
 	</dict>

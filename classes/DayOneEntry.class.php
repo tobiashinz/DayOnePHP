@@ -114,6 +114,26 @@ class DayOneEntry {
     }
 
     /**
+     * Sets a Foursquare ID in location
+     *
+     * @param string $id Foursquare ID of location
+     */
+    public function setLocationFoursquareId($id) {
+        if (empty($this->_location)) {
+            die('setLocationFoursquareId(): Please use setLocation() first');
+        }
+
+        if (empty($id)) {
+            die('setLocationFoursquareId(): id must be set');
+        }
+        $this->_location['foursquareId'] = $id;
+
+        if ($this->debug) {
+            echo 'Foursquare ID set successfully';
+        }
+    }
+
+    /**
      * Returns UUID of DayOne-Entry
      *
      * @return string The UUID
@@ -151,6 +171,19 @@ class DayOneEntry {
             $templateLocation = str_replace('{{Longitude}}', $this->_location['longitude'], $templateLocation);
             $templateLocation = str_replace('{{Locality}}', $this->_location['locality'], $templateLocation);
             $templateLocation = str_replace('{{Place_Name}}', $this->_location['name'], $templateLocation);
+
+            // Check if Foursquare ID has to be added
+            if (isset($this->_location['foursquareId'])) {
+                // Load Template-Location
+                $templateLocationFoursquare = file_get_contents(dirname(__FILE__) . '/templates/location_foursquare.template');
+
+                $templateLocationFoursquare = str_replace('{{Location_Foursquare-ID_Foursquare-ID}}', $this->_location['foursquareId'], $templateLocationFoursquare);
+
+                // Put Foursquare ID into location
+                $templateLocation = str_replace('{{Location_Foursquare-ID}}', $templateLocationFoursquare, $templateLocation);
+            } else {
+                $templateLocation = str_replace('{{Location_Foursquare-ID}}', '', $templateLocation);
+            }
 
             // Put location text into DayOne-Entry
             $template = str_replace('{{Location}}', $templateLocation, $template);
