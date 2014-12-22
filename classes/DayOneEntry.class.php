@@ -1,7 +1,7 @@
 <?php
  /**
   * @author Tobias Hinz <hallo@tobiashinz.de>
-  * @version 0.0.1
+  * @version 0.0.2
   */
 class DayOneEntry {
    /**
@@ -17,7 +17,7 @@ class DayOneEntry {
      */
     protected $_uuid, $_creationDate, $_activity, $_creator, $_entryText, $_timeZone, $_music, $_location, $_debug;
 
-    const VERSION = '0.0.1';
+    const VERSION = '0.0.2';
 
     /**
      * If UUID is submitted then use that one, otherwise generate uuid
@@ -41,7 +41,7 @@ class DayOneEntry {
         $this->_timeZone = date_default_timezone_get();
         $this->_creator = array(
             'Device Agent' => 'DayOne PHP',
-            'Generation Date' => strval(date('Y-m-d\TG:i:s\Z')),
+            'Generation Date' => strval(date('Y-m-d\TH:i:s\Z')),
             'Host Name' => 'DayOne PHP',
             'OS Agent' => 'DayOne PHP',
             'Software Agent' => 'DayOne PHP' . ' ' . self::VERSION
@@ -82,7 +82,7 @@ class DayOneEntry {
      * @param int $time Timestampt
      */
     public function setTime($time) {
-        $this->_creationDate = strval(date('Y-m-d\TG:i:s\Z', $time));
+        $this->_creationDate = strval(date('Y-m-d\TH:i:s\Z', $time));
     }
 
     /**
